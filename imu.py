@@ -1,12 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Mon Mar 18 17:11:58 2013
-
-@author: -
-"""
-
-#
-# -*- coding: utf-8 -*-
 #
 """
 Created on Tue Oct 18 19:10:38 2011
@@ -20,23 +12,7 @@ import serial
 import scipy.signal
 import numpy as np
 import string as st
-
-
-#
-# -*- coding: utf-8 -*-
-#
-"""
-Created on Tue Oct 18 19:10:38 2011
-
-@author: -
-"""
-import sys
-from PyQt4 import QtCore, QtGui, uic
-import PyQt4.Qwt5 as Qwt
-import serial
-import scipy.signal
-import numpy as np
-import string as st
+import time
 from neurolab.core import Train, Trainer, TrainStop
 import neurolab as nl
 
@@ -120,6 +96,28 @@ class MainWindow(QtGui.QDialog):
         self.myplot.replot()        
         self.myplot1.replot()        
 
+    def save_to_file(self):
+        np.savetxt(str(int(time.time())), ( self.ax, self.ay, self.az))
+        self.t=np.array([])       
+        self.ax=np.array([])
+        self.ay=np.array([])       
+        self.az=np.array([])
+        self.wx=np.array([])
+        self.wy=np.array([])       
+        self.wz=np.array([])
+        self.i=1;
+        self.pl_ax.setData(self.t,self.ax)
+        self.pl_ay.setData(self.t,self.ay)
+        self.pl_az.setData(self.t,self.az)
+        
+        self.pl_wx.setData(self.t,self.wx)
+        self.pl_wy.setData(self.t,self.wy)
+        self.pl_wz.setData(self.t,self.wz)
+        
+        self.myplot.replot()        
+        self.myplot1.replot()        
+            
+    
 
               
 
